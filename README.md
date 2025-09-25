@@ -1,6 +1,7 @@
 # Controller based .NET Core Web API with Angular 20 frontend.
 
 First of all, let's make sure we have the latest Angular CLI.
+Install node.js from https://nodejs.org/en/download
 ```bash
 npm uninstall -g @angular/cli
 npm install -g @angular/cli@latest
@@ -18,12 +19,13 @@ cd TodoApi
 dotnet add package Microsoft.EntityFrameworkCore.InMemory
 code -r ../TodoApi
 ```
-
+Answer 'Yes, I trust the authors' when you receive the prompt: 'Do you trust the authors of the files in this folder'.
 Now that the project is created, let's make sure we trust the development certificates.
 ```bash
 dotnet dev-certs https --trust
 ```
-Add a .gitignore file to the root folder. If you need to do this afterwards and you want to exclude folders that have already been checked in, you need to remove them from the git cache before they are ignored. This example excludes the wwwroot folder from the git-cache.
+
+Add a .gitignore file to the root folder. If you need to do this afterwards and you want to exclude folders that have already been checked in, you need to remove them from the git cache before they are ignored. This example excludes the wwwroot folder from the git-cache. You only need to do this if you are using Git.
 
 ```bash
 git rm --cached wwwroot -r
@@ -35,6 +37,9 @@ dotnet run --launch-profile https
 
 It has a Weatherforecasts endponit per default. You can view your current API using the swagger:
 https://localhost:7190/swagger/index.html
+If you receive a net::ERR_CERT_AUTHORITY_INVALID error you will have to import the certificate into trusted root certificates. 
+Download the certificate from Edge and save it.
+Open mmc.exe as administrator and add the plugin Certificates for User account. Right click certificates under Trusted root certificates->All activities->Import and select the downloaded certificate.
 
 ## Database-first approach
 If you already have a database, you can scaffold your model classes and DataContext based of the tables in the database.
